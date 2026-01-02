@@ -511,6 +511,45 @@
           Copiá y pegá este contenido en ChatGPT (o donde quieras) para seguir jugando con la estrategia.
         </p>
       </div>
+      
+    <!-- 📅 NUEVO: CALENDARIO PERSONAL DE NOTAS (debajo de Exportar/Importar) -->
+      <div class="card">
+        <h2>Calendario personal de notas</h2>
+        <p class="note">
+          Pensado para usar rápido desde el celular: elegís una fecha, escribís un recordatorio y queda guardado
+          sólo en este dispositivo (localStorage). Ideal para reuniones, vencimientos, ideas, etc.
+        </p>
+
+        <div class="flex" style="gap:.6rem; margin-top:.5rem; align-items:flex-end;">
+          <div style="min-width:140px;">
+            <label for="cal-date">Fecha</label>
+            <input type="date" id="cal-date">
+          </div>
+          <div style="flex:1;">
+            <label for="cal-title">Título / resumen</label>
+            <input type="text" id="cal-title" placeholder="Ej: Reunión consejo, revisar cartera, etc.">
+          </div>
+        </div>
+
+        <div style="margin-top:.5rem;">
+          <label for="cal-text">Detalle / recordatorio</label>
+          <textarea id="cal-text" rows="3" style="width:100%; padding:.4rem .5rem; border-radius:.45rem; border:1px solid #d1d5db; font-size:.8rem; resize:vertical;" placeholder="Escribí más detalles si lo necesitás..."></textarea>
+        </div>
+
+        <div style="margin-top:.55rem;">
+          <button class="btn" id="cal-save-btn">Guardar / actualizar nota</button>
+          <button class="btn secondary" id="cal-delete-btn" style="margin-left:.4rem; background:#ef4444; box-shadow:0 3px 8px rgba(239,68,68,.35);">
+            Borrar nota del día
+          </button>
+        </div>
+
+        <p class="note">
+          Tip: usalo como “memoria externa” para no cargar todo en la cabeza. Las notas quedan sólo en este celu/PC.
+        </p>
+
+        <h3 style="font-size:.9rem; margin:.8rem 0 .3rem;">Próximas notas</h3>
+        <div id="cal-list" class="cal-list"></div>
+      </div>
     </div>
   </div>
 
@@ -921,4 +960,5 @@ Acá tenés el estado actual en formato JSON:
   </script>
 </body>
 </html>
+
 
