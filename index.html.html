@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portafolio Conservador & Agresivo - Leandro</title>
+
+  <!-- Icono para pestaña del navegador -->
+  <link rel="icon" type="image/png" href="icon-192.png">
+
+  <!-- Icono cuando se agrega a pantalla de inicio (iOS / Android) -->
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <!-- Manifest PWA para que tome iconos y nombre como app -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Color de la barra superior cuando se instala como app -->
+  <meta name="theme-color" content="#0f766e">
+
+  <!-- Fuente limpia similar a páginas de finanzas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      min-height: 100vh;
+      background: #f3f5f9;
+      color: #111827;
+    }
+
+    h1 {
+      margin: 0 0 .4rem;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #0b1120;
+    }
+
+    h2 {
+      margin: 0 0 .4rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    p {
+      margin: 0 0 .6rem;
+      font-size: .9rem;
+      color: #4b5563;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.2rem;
+      margin-top: .8rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: .75rem;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      font-size: .7rem;
+      padding: .15rem .6rem;
+      border-radius: 999px;
+      border: 1px solid #d1fae5;
+      background: #ecfdf5;
+      color: #047857;
+      margin-left: .35rem;
+    }
+
+    .pill-agg {
+      border-color: #dbeafe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    label {
+      font-size: .75rem;
+      color: #6b7280;
+      display: block;
+      margin-bottom: .15rem;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: .3rem .45rem;
+      border-radius: .45rem;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
+      font-size: .8rem;
+      transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.55);
+      background: #ffffff;
+    }
+
+    .small-input-group {
+      width: 160px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+      margin-top: .6rem;
+      border-radius: .6rem;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
+    thead {
+      background: #0f766e;
+      color: #f9fafb;
+    }
+
+    th,
+    td {
+      padding: .4rem .4rem;
+      text-align: right;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      font-weight: 500;
+      font-size: .72rem;
+      white-space: nowrap;
+    }
+
+    td:first-child,
+    th:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #ffffff;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    tbody tr:hover {
+      background: #e0f2fe;
+    }
+
+    .number-cell {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .target-input {
+      width: 72px;
+      text-align: right;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-top: .7rem;
+    }
+
+    @media (max-width: 700px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .summary-card {
+      border-radius: .7rem;
+      padding: .55rem .7rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .summary-title {
+      font-size: .8rem;
+      margin-bottom: .25rem;
+      font-weight: 500;
+      color: #0f172a;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .15rem;
+      font-size: .78rem;
+    }
+
+    .summary-label {
+      color: #6b7280;
+    }
+
+    .summary-value {
+      font-variant-numeric: tabular-nums;
+      color: #111827;
+    }
+
+    .note {
+      font-size: .72rem;
+      color: #6b7280;
+      margin-top: .4rem;
+    }
+
+    .btn {
+      margin-top: .55rem;
+      padding: .38rem .9rem;
+      font-size: .8rem;
+      border-radius: 999px;
+      border: none;
+      background: #059669;
+      color: #ecfdf5;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: .01em;
+      box-shadow: 0 3px 8px rgba(5, 150, 105, 0.45);
+      transition: transform .08s ease, box-shadow .08s ease, background .1s ease;
+    }
+
+    .btn:hover {
+      background: #047857;
+      box-shadow: 0 4px 10px rgba(4, 120, 87, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(4, 120, 87, 0.4);
+    }
+
+    .btn.secondary {
+      background: #0ea5e9;
+      color: #f0f9ff;
+      box-shadow: 0 3px 8px rgba(14, 165, 233, 0.5);
+    }
+
+    .btn.secondary:hover {
+      background: #0284c7;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.6);
+    }
+
+    #json-area {
+      width: 100%;
+      margin-top: .5rem;
+      background: #f9fafb;
+      color: #111827;
+      border: 1px solid #d1d5db;
+      border-radius: .6rem;
+      font-size: .75rem;
+      padding: .5rem .6rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      resize: vertical;
+      min-height: 180px;
+    }
+
+    #json-area:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 1px rgba(14, 165, 233, .55);
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Panel de Portafolio – Conservador & Agresivo</h1>
+  <p>
+    • Definís <strong>monto inicial</strong> y cargás tus <strong>aportes mensuales</strong>.<br>
+    • El sistema calcula el <strong>total invertido</strong> y reparte por <strong>% de inversión</strong> (editables).<br>
+    • Podés <strong>agregar activos</strong>, <strong>exportar/importar JSON</strong> y generar un texto listo para la <strong>IA</strong>.
+  </p>
+
+  <div class="layout">
+    <!-- IZQUIERDA: CARTERAS + MESES -->
+    <div>
+      <!-- CONSERVADORA -->
+      <div class="card" id="cons-card">
+        <div class="flex">
+          <h2>Cartera Conservadora
+            <span class="pill">KO · JNJ · MCD · MSFT · NVDA · AMD · GOOGL · TSM · SPY · QQQ</span>
+          </h2>
+          <div class="small-input-group">
+            <label for="cons-inicial">Monto inicial (ya invertido)</label>
+            <input type="number" id="cons-inicial" value="0" min="0" step="1000">
+          </div>
+          <div class="small-input-group">
+            <label for="cons-aporte-mes">Aporte de este mes</label>
+            <input type="number" id="cons-aporte-mes" value="0" min="0" step="1000">
+          </div>
+        </div>
+        <p class="note">
+          Total invertido = monto inicial + suma de aportes mensuales (tabla de abajo).
+          Con eso se reparte el capital según los porcentajes por activo (columna editable).
+        </p>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Acción</th>
+            <th>% objetivo</th>
+            <th>Monto sugerido total</th>
+            <th>A comprar este mes</th>
+          </tr>
+          </thead>
+          <tbody id="cons-body"></tbody>
+        </table>
+
+        <button class="btn" id="cons-add-asset-btn">+ Agregar activo a Conservadora</button>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-title">Resumen Conservadora</div>
+            <div class="summary-item">
+              <span class="summary-label">Total invertido acumulado</span>
+              <span class="summary-value" id="cons-total-inv">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Aportes acumulados (solo meses)</span>
+              <span class="summary-value" id="cons-aportes-sum">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGRESIVA -->
+      <div class="card" id="agg-card">
+        <div class="flex">
+          <h2>Cartera Agresiva
+            <span class="pill pill-agg">NVDA · AMD · TSM · ASML · META · GOOGL · AMZN · QQQ · MSFT</span>
+          </h2>
+          <div class="small-input-group">
+            <label for="agg-inicial">Monto inicial (ya invertido)</label>
+            <input type="number" id="agg-inicial" value="0" min="0" step="1000">
+          </div>
+          <div class="small-input-group">
+            <label for="agg-aporte-mes">Aporte de este mes</label>
+            <input type="number" id="agg-aporte-mes" value="0" min="0" step="1000">
+          </div>
+        </div>
+        <p class="note">
+          Igual lógica: monto inicial + aportes → total invertido. Con los % de la tabla (editables) se reparte el capital.
+        </p>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Acción</th>
+            <th>% objetivo</th>
+            <th>Monto sugerido total</th>
+            <th>A comprar este mes</th>
+          </tr>
+          </thead>
+          <tbody id="agg-body"></tbody>
+        </table>
+
+        <button class="btn" id="agg-add-asset-btn">+ Agregar activo a Agresiva</button>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-title">Resumen Agresiva</div>
+            <div class="summary-item">
+              <span class="summary-label">Total invertido acumulado</span>
+              <span class="summary-value" id="agg-total-inv">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Aportes acumulados (solo meses)</span>
+              <span class="summary-value" id="agg-aportes-sum">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REGISTRO MENSUAL -->
+      <div class="card">
+        <h2>Registro mensual de aportes y dividendos (reales)</h2>
+        <p class="note">
+          Una fila por mes. Las columnas de "Aporte Cons." y "Aporte Agres." se usan para calcular cuánto llevás invertido
+          (sumado al monto inicial). Los dividendos aquí son los reales que efectivamente cobrás.
+        </p>
+        <table>
+          <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Aporte Cons.</th>
+            <th>Div. Cons.</th>
+            <th>Valor Cons. fin de mes</th>
+            <th>Aporte Agres.</th>
+            <th>Div. Agres.</th>
+            <th>Valor Agres. fin de mes</th>
+          </tr>
+          </thead>
+          <tbody id="months-body"></tbody>
+        </table>
+        <button class="btn" id="add-row-btn">+ Agregar mes</button>
+      </div>
+    </div>
+
+    <!-- DERECHA: RESUMEN GLOBAL + JSON/IA -->
+    <div>
+      <div class="card">
+        <h2>Resumen global y comparación</h2>
+        <p class="note">
+          Resultado total = valor actual (último mes) + dividendos acumulados − (monto inicial + aportes acumulados).
+        </p>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-title">Conservadora</div>
+            <div class="summary-item">
+              <span class="summary-label">Aportes acumulados (meses)</span>
+              <span class="summary-value" id="cons-aportes">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Dividendos acumulados</span>
+              <span class="summary-value" id="cons-divs">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Valor actual (último mes)</span>
+              <span class="summary-value" id="cons-valor">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Resultado total</span>
+              <span class="summary-value" id="cons-result">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Rentabilidad total</span>
+              <span class="summary-value" id="cons-rentab">—</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-title">Agresiva</div>
+            <div class="summary-item">
+              <span class="summary-label">Aportes acumulados (meses)</span>
+              <span class="summary-value" id="agg-aportes">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Dividendos acumulados</span>
+              <span class="summary-value" id="agg-divs">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Valor actual (último mes)</span>
+              <span class="summary-value" id="agg-valor">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Resultado total</span>
+              <span class="summary-value" id="agg-result">—</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Rentabilidad total</span>
+              <span class="summary-value" id="agg-rentab">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Exportar / Importar / IA</h2>
+        <p class="note">
+          • <strong>Exportar JSON</strong>: genera un JSON con el estado completo de tus carteras.<br>
+          • <strong>Importar JSON</strong>: pegás un JSON guardado y se restaura todo.<br>
+          • <strong>Texto para IA</strong>: genera un texto listo para pegar en ChatGPT para que analice tu situación y sugiera pasos.
+        </p>
+        <button class="btn secondary" id="export-json-btn">Exportar JSON</button>
+        <button class="btn secondary" id="import-json-btn">Importar JSON</button>
+        <button class="btn secondary" id="ia-btn">Preparar texto para IA</button>
+        <textarea id="json-area" rows="10" placeholder="Acá vas a ver el JSON exportado, o pegá uno para importar."></textarea>
+        <p class="note">
+          Copiá y pegá este contenido en ChatGPT (o donde quieras) para seguir jugando con la estrategia.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === Config base de activos y % objetivo ===
+    const BASE_CONS_ASSETS = [
+      { ticker:"KO",    name:"Coca-Cola",             target:10 },
+      { ticker:"JNJ",   name:"Johnson & Johnson",     target:10 },
+      { ticker:"MCD",   name:"McDonald's",            target:10 },
+      { ticker:"MSFT",  name:"Microsoft",             target:10 },
+      { ticker:"NVDA",  name:"Nvidia",                target:15 },
+      { ticker:"AMD",   name:"AMD",                   target:10 },
+      { ticker:"GOOGL", name:"Alphabet (Google)",     target:10 },
+      { ticker:"TSM",   name:"Taiwan Semi (TSMC)",    target:5  },
+      { ticker:"SPY",   name:"ETF S&P 500",           target:10 },
+      { ticker:"QQQ",   name:"ETF Nasdaq 100",        target:10 }
+    ];
+
+    const BASE_AGG_ASSETS = [
+      { ticker:"NVDA",  name:"Nvidia",             target:20 },
+      { ticker:"AMD",   name:"AMD",                target:10 },
+      { ticker:"TSM",   name:"Taiwan Semi (TSMC)", target:10 },
+      { ticker:"ASML",  name:"ASML Holding",       target:10 },
+      { ticker:"META",  name:"Meta Platforms",     target:10 },
+      { ticker:"GOOGL", name:"Alphabet (Google)",  target:10 },
+      { ticker:"AMZN",  name:"Amazon",             target:10 },
+      { ticker:"QQQ",   name:"ETF Nasdaq 100",     target:10 },
+      { ticker:"MSFT",  name:"Microsoft",          target:10 }
+    ];
+
+    let conservativeAssets = [...BASE_CONS_ASSETS];
+    let aggressiveAssets   = [...BASE_AGG_ASSETS];
+
+    const consBody    = document.getElementById("cons-body");
+    const aggBody     = document.getElementById("agg-body");
+    const monthsBody  = document.getElementById("months-body");
+    const addRowBtn   = document.getElementById("add-row-btn");
+
+    const consInicialInput = document.getElementById("cons-inicial");
+    const aggInicialInput  = document.getElementById("agg-inicial");
+    const consApMesInput   = document.getElementById("cons-aporte-mes");
+    const aggApMesInput    = document.getElementById("agg-aporte-mes");
+
+    const consAddAssetBtn  = document.getElementById("cons-add-asset-btn");
+    const aggAddAssetBtn   = document.getElementById("agg-add-asset-btn");
+
+    const exportJsonBtn    = document.getElementById("export-json-btn");
+    const importJsonBtn    = document.getElementById("import-json-btn");
+    const iaBtn            = document.getElementById("ia-btn");
+    const jsonArea         = document.getElementById("json-area");
+
+    // Resúmenes por cartera
+    const consTotalInvEl   = document.getElementById("cons-total-inv");
+    const consAportesSumEl = document.getElementById("cons-aportes-sum");
+
+    const aggTotalInvEl    = document.getElementById("agg-total-inv");
+    const aggAportesSumEl  = document.getElementById("agg-aportes-sum");
+
+    // Resumen global
+    const consAportesEl = document.getElementById("cons-aportes");
+    const consDivsEl    = document.getElementById("cons-divs");
+    const consValorEl   = document.getElementById("cons-valor");
+    const consResultEl  = document.getElementById("cons-result");
+    const consRentabEl  = document.getElementById("cons-rentab");
+
+    const aggAportesEl = document.getElementById("agg-aportes");
+    const aggDivsEl    = document.getElementById("agg-divs");
+    const aggValorEl   = document.getElementById("agg-valor");
+    const aggResultEl  = document.getElementById("agg-result");
+    const aggRentabEl  = document.getElementById("agg-rentab");
+
+    const STORAGE_KEY = "leandroPortfolioV2";
+
+    function formatMoney(v) {
+      if (!isFinite(v)) return "—";
+      return "$ " + v.toLocaleString("es-AR", { minimumFractionDigits:2, maximumFractionDigits:2 });
+    }
+    function formatPercent(v) {
+      if (!isFinite(v)) return "—";
+      return v.toFixed(2) + " %";
+    }
+
+    function buildAllocationTable(assets, tbody) {
+      tbody.innerHTML = "";
+      assets.forEach(a => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${a.ticker}</td>
+          <td>${a.name}</td>
+          <td>
+            <input type="number" class="target-input" value="${a.target.toFixed(1)}" min="0" max="100" step="0.5">
+          </td>
+          <td class="number-cell cell-total">—</td>
+          <td class="number-cell cell-mes">—</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Cuando cambian los % objetivo, recalculamos
+      tbody.querySelectorAll(".target-input").forEach((inp, idx) => {
+        inp.addEventListener("input", () => {
+          const val = parseFloat(inp.value);
+          if (isFinite(val) && val >= 0) {
+            assets[idx].target = val;
+            recalcAllocations();
+          }
+        });
+      });
+    }
+
+    function calcSumsFromMonths() {
+      let consAportes = 0, consDivs = 0, consValorUlt = 0;
+      let aggAportes = 0, aggDivs = 0, aggValorUlt = 0;
+
+      const rows = Array.from(monthsBody.querySelectorAll("tr"));
+      rows.forEach(row => {
+        const cA = parseFloat(row.querySelector(".cons-aporte")?.value || "0");
+        const cD = parseFloat(row.querySelector(".cons-div")?.value || "0");
+        const cV = parseFloat(row.querySelector(".cons-valor")?.value || "0");
+        const aA = parseFloat(row.querySelector(".agg-aporte")?.value || "0");
+        const aD = parseFloat(row.querySelector(".agg-div")?.value || "0");
+        const aV = parseFloat(row.querySelector(".agg-valor")?.value || "0");
+
+        if (cA > 0) consAportes += cA;
+        if (cD > 0) consDivs    += cD;
+        if (cV > 0) consValorUlt = cV;
+
+        if (aA > 0) aggAportes += aA;
+        if (aD > 0) aggDivs    += aD;
+        if (aV > 0) aggValorUlt = aV;
+      });
+
+      return {
+        consAportes, consDivs, consValorUlt,
+        aggAportes, aggDivs, aggValorUlt
+      };
+    }
+
+    function recalcAllocations() {
+      const sums = calcSumsFromMonths();
+
+      const consInicial = parseFloat(consInicialInput.value || "0");
+      const aggInicial  = parseFloat(aggInicialInput.value || "0");
+
+      const consTotalInvertido = consInicial + sums.consAportes;
+      const aggTotalInvertido  = aggInicial  + sums.aggAportes;
+
+      const consApMes = parseFloat(consApMesInput.value || "0");
+      const aggApMes  = parseFloat(aggApMesInput.value || "0");
+
+      // CONSERVADORA
+      const consRows = Array.from(consBody.querySelectorAll("tr"));
+      conservativeAssets.forEach((asset, idx) => {
+        const row = consRows[idx];
+        if (!row) return;
+
+        const targetInput = row.querySelector(".target-input");
+        const targetVal = parseFloat(targetInput.value || asset.target);
+        const frac = targetVal / 100;
+
+        const totalSug = consTotalInvertido * frac;
+        const mesSug   = consApMes * frac;
+
+        row.querySelector(".cell-total").textContent = consTotalInvertido > 0 ? formatMoney(totalSug) : "—";
+        row.querySelector(".cell-mes").textContent   = consApMes > 0 ? formatMoney(mesSug) : "—";
+
+        if (isFinite(targetVal)) asset.target = targetVal;
+      });
+
+      consTotalInvEl.textContent   = consTotalInvertido > 0 ? formatMoney(consTotalInvertido) : "—";
+      consAportesSumEl.textContent = sums.consAportes > 0 ? formatMoney(sums.consAportes) : "—";
+
+      // AGRESIVA
+      const aggRows = Array.from(aggBody.querySelectorAll("tr"));
+      aggressiveAssets.forEach((asset, idx) => {
+        const row = aggRows[idx];
+        if (!row) return;
+
+        const targetInput = row.querySelector(".target-input");
+        const targetVal = parseFloat(targetInput.value || asset.target);
+        const frac = targetVal / 100;
+
+        const totalSug = aggTotalInvertido * frac;
+        const mesSug   = aggApMes * frac;
+
+        row.querySelector(".cell-total").textContent = aggTotalInvertido > 0 ? formatMoney(totalSug) : "—";
+        row.querySelector(".cell-mes").textContent   = aggApMes > 0 ? formatMoney(mesSug) : "—";
+
+        if (isFinite(targetVal)) asset.target = targetVal;
+      });
+
+      aggTotalInvEl.textContent   = aggTotalInvertido > 0 ? formatMoney(aggTotalInvertido) : "—";
+      aggAportesSumEl.textContent = sums.aggAportes > 0 ? formatMoney(sums.aggAportes) : "—";
+
+      // Resumen global de rentabilidad
+      const consBase = consInicial + sums.consAportes;
+      const consResultado = sums.consValorUlt + sums.consDivs - consBase;
+      const consRentab    = consBase > 0 ? (consResultado / consBase) * 100 : NaN;
+
+      consAportesEl.textContent = sums.consAportes > 0 ? formatMoney(sums.consAportes) : "—";
+      consDivsEl.textContent    = sums.consDivs > 0 ? formatMoney(sums.consDivs) : "—";
+      consValorEl.textContent   = sums.consValorUlt > 0 ? formatMoney(sums.consValorUlt) : "—";
+      consResultEl.textContent  = isFinite(consResultado) && consBase > 0 ? formatMoney(consResultado) : "—";
+      consRentabEl.textContent  = isFinite(consRentab) ? formatPercent(consRentab) : "—";
+
+      const aggBase = aggInicial + sums.aggAportes;
+      const aggResultado = sums.aggValorUlt + sums.aggDivs - aggBase;
+      const aggRentab    = aggBase > 0 ? (aggResultado / aggBase) * 100 : NaN;
+
+      aggAportesEl.textContent = sums.aggAportes > 0 ? formatMoney(sums.aggAportes) : "—";
+      aggDivsEl.textContent    = sums.aggDivs > 0 ? formatMoney(sums.aggDivs) : "—";
+      aggValorEl.textContent   = sums.aggValorUlt > 0 ? formatMoney(sums.aggValorUlt) : "—";
+      aggResultEl.textContent  = isFinite(aggResultado) && aggBase > 0 ? formatMoney(aggResultado) : "—";
+      aggRentabEl.textContent  = isFinite(aggRentab) ? formatPercent(aggRentab) : "—";
+
+      saveState();
+    }
+
+    function addMonthRow(label, data) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input type="text" class="mes" value="${data?.mes || label || ""}" placeholder="Mes"></td>
+        <td><input type="number" class="cons-aporte" min="0" step="1000" placeholder="0" value="${data?.consAp || ""}"></td>
+        <td><input type="number" class="cons-div"    min="0" step="100"  placeholder="0" value="${data?.consDiv || ""}"></td>
+        <td><input type="number" class="cons-valor"  min="0" step="1000" placeholder="0" value="${data?.consVal || ""}"></td>
+        <td><input type="number" class="agg-aporte"  min="0" step="1000" placeholder="0" value="${data?.aggAp || ""}"></td>
+        <td><input type="number" class="agg-div"     min="0" step="100"  placeholder="0" value="${data?.aggDiv || ""}"></td>
+        <td><input type="number" class="agg-valor"   min="0" step="1000" placeholder="0" value="${data?.aggVal || ""}"></td>
+      `;
+      monthsBody.appendChild(tr);
+      tr.querySelectorAll("input").forEach(inp => inp.addEventListener("input", recalcAllocations));
+    }
+
+    function collectState() {
+      const rows = Array.from(monthsBody.querySelectorAll("tr"));
+      const months = rows.map(row => ({
+        mes:    row.querySelector(".mes")?.value || "",
+        consAp: row.querySelector(".cons-aporte")?.value || "",
+        consDiv:row.querySelector(".cons-div")?.value || "",
+        consVal:row.querySelector(".cons-valor")?.value || "",
+        aggAp:  row.querySelector(".agg-aporte")?.value || "",
+        aggDiv: row.querySelector(".agg-div")?.value || "",
+        aggVal: row.querySelector(".agg-valor")?.value || ""
+      }));
+
+      return {
+        consInicial: consInicialInput.value || "",
+        aggInicial:  aggInicialInput.value || "",
+        consApMes:   consApMesInput.value || "",
+        aggApMes:    aggApMesInput.value || "",
+        months,
+        consAssets:  conservativeAssets,
+        aggAssets:   aggressiveAssets
+      };
+    }
+
+    function saveState() {
+      const state = collectState();
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function applyState(state) {
+      consInicialInput.value = state.consInicial ?? "0";
+      aggInicialInput.value  = state.aggInicial  ?? "0";
+      consApMesInput.value   = state.consApMes   ?? "0";
+      aggApMesInput.value    = state.aggApMes    ?? "0";
+
+      if (state.consAssets && Array.isArray(state.consAssets) && state.consAssets.length > 0) {
+        conservativeAssets = state.consAssets;
+      } else {
+        conservativeAssets = [...BASE_CONS_ASSETS];
+      }
+
+      if (state.aggAssets && Array.isArray(state.aggAssets) && state.aggAssets.length > 0) {
+        aggressiveAssets = state.aggAssets;
+      } else {
+        aggressiveAssets = [...BASE_AGG_ASSETS];
+      }
+
+      buildAllocationTable(conservativeAssets, consBody);
+      buildAllocationTable(aggressiveAssets,  aggBody);
+
+      monthsBody.innerHTML = "";
+      if (state.months && Array.isArray(state.months) && state.months.length > 0) {
+        state.months.forEach(m => addMonthRow(null, m));
+      } else {
+        addMonthRow("Mes 1");
+        addMonthRow("Mes 2");
+        addMonthRow("Mes 3");
+      }
+
+      recalcAllocations();
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const state = JSON.parse(raw);
+          applyState(state);
+          return;
+        }
+      } catch (e) {}
+      applyState({});
+    }
+
+    function addAsset(portfolio) {
+      const ticker = prompt("Ticker del activo (ej: KO, NVDA, etc.):");
+      if (!ticker) return;
+      const name = prompt("Nombre descriptivo del activo:");
+      if (!name) return;
+      const targetStr = prompt("Porcentaje objetivo dentro de la cartera (solo número, ej: 5):");
+      const target = parseFloat(targetStr);
+      if (!isFinite(target) || target <= 0) {
+        alert("Porcentaje inválido.");
+        return;
+      }
+
+      const asset = {
+        ticker: ticker.trim().toUpperCase(),
+        name: name.trim(),
+        target
+      };
+
+      if (portfolio === "cons") {
+        conservativeAssets.push(asset);
+        buildAllocationTable(conservativeAssets, consBody);
+      } else {
+        aggressiveAssets.push(asset);
+        buildAllocationTable(aggressiveAssets, aggBody);
+      }
+      recalcAllocations();
+    }
+
+    function exportJson() {
+      const state = collectState();
+      const text = JSON.stringify(state, null, 2);
+      jsonArea.value = text;
+      try {
+        navigator.clipboard.writeText(text);
+        alert("JSON copiado al portapapeles.");
+      } catch (e) {
+        alert("JSON generado en el recuadro. Copialo y guardalo donde quieras.");
+      }
+    }
+
+    function importJson() {
+      const text = jsonArea.value.trim();
+      if (!text) {
+        alert("Pegá primero un JSON en el recuadro.");
+        return;
+      }
+      try {
+        const state = JSON.parse(text);
+        applyState(state);
+        saveState();
+        alert("Datos importados correctamente.");
+      } catch (e) {
+        alert("El JSON no es válido. Revisá el contenido.");
+      }
+    }
+
+    function prepareIA() {
+      const state = collectState();
+      const promptText =
+`Analizá mi situación de inversión con dos carteras (conservadora y agresiva) y sugerime próximos pasos.
+Quiero mirar:
+- Si los porcentajes de cada activo tienen sentido.
+- Cómo seguir aportando mes a mes.
+- Cómo equilibrar entre perfil conservador y agresivo.
+
+Acá tenés el estado actual en formato JSON:
+
+` + JSON.stringify(state, null, 2);
+
+      jsonArea.value = promptText;
+      try {
+        navigator.clipboard.writeText(promptText);
+        alert("Texto para IA copiado al portapapeles. Pegalo en ChatGPT para seguir el análisis.");
+      } catch (e) {
+        alert("Texto para IA generado en el recuadro. Copialo y pegalo en la IA.");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      consInicialInput.addEventListener("input", recalcAllocations);
+      aggInicialInput.addEventListener("input", recalcAllocations);
+      consApMesInput.addEventListener("input", recalcAllocations);
+      aggApMesInput.addEventListener("input", recalcAllocations);
+
+      consAddAssetBtn.addEventListener("click", () => addAsset("cons"));
+      aggAddAssetBtn.addEventListener("click", () => addAsset("agg"));
+
+      exportJsonBtn.addEventListener("click", exportJson);
+      importJsonBtn.addEventListener("click", importJson);
+      iaBtn.addEventListener("click", prepareIA);
+
+      loadState();
+    });
+
+    addRowBtn.addEventListener("click", () => {
+      const n = monthsBody.querySelectorAll("tr").length + 1;
+      addMonthRow("Mes " + n);
+      recalcAllocations();
+    });
+  </script>
+</body>
+</html>
